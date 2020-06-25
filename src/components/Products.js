@@ -1,17 +1,17 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+import { Product } from './Product'
 
-export const Product = ({ product }) => {
+export const Products = () => {
+  // TODO - fetch all products from the store
+  // const allProducts = []
+  const allProducts = useSelector((state) => state.products)
+
   return (
-    <article className="product">
-      <span className="emoji" role="img" aria-label={product.title}>{product.emoji}</span>
-      <p>{product.price}:-</p>
-
-      <button
-        type="button"
-        disabled={product.inventory === 0}
-        onClick={() => { }}>
-        Add to cart
-      </button>
-    </article>
+    <div className="products">
+      {allProducts.map((product) => (
+        <Product key={product.id} product={product} />
+      ))}
+    </div>
   )
 }
